@@ -26,6 +26,9 @@ public:
         while(b>=0)         A[i--]=B[b--];
     }
 };
+
+
+// the solution for go
 func merge(nums1 []int, m int, nums2 []int, n int) {
 	res := make([]int, 0)
 	i := 0
