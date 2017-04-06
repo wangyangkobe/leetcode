@@ -33,3 +33,51 @@ public:
         return isSymmetricHelp(left->left, right->right) && isSymmetricHelp(left->right, right->left);
     }
 };
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(!root)
+            return true;
+            
+        stack<TreeNode*> s;
+        
+        if(!(root->left) || !(root->right))
+            return root->left == root->right;
+    
+        s.push(root->left);
+        s.push(root->right);
+        
+        while(!s.empty()) {
+            TreeNode* right = s.top();
+            s.pop();
+            TreeNode* left  = s.top();
+            s.pop();
+            
+            if(!right && !left)
+                continue;
+                
+            if(!left || !right)
+                return false;
+                
+            if(right->val != left->val)
+                return false;
+            
+            s.push(left->left);
+            s.push(right->right);
+            s.push(left->right);
+            s.push(right->left);
+        }
+        return true;
+    }
+};
